@@ -1,0 +1,156 @@
+<html>
+    <head>
+        <title> LOGIN PAGE</title>
+        <link rel="icon" href="N.jpg"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="project2.css"/>
+        <script src="project.js"></script>
+
+        <style>
+            body{
+                background-color:white;
+                color:black
+            }
+            .mydark{
+                background-color:black;
+                color:white
+            }
+            #coupon{
+                background-image: url(https://ci5.googleusercontent.com/proxy/n35efvC4Tr4457vjC0NW2T-6hzjJgQGvW120ek-Tmy9ekFv_FP25PSTNsC3kE9recmoDO3YtrsguCG05J-AoMbvWt4X5_WKkgU5dlATrCghAXLoYEwDsyIa0p3R6OO4OYCzWRIlkEjA5XbzAsRCDLNIl=s0-d-e1-ft#http://img.emt.easemytrip.com/images/easemytripc/easemytripc_723/8_emtcol-7mar20-bus-mailer.png);
+            }
+        </style>
+        <script>
+            const changeMode=()=>{
+                let mybody = document.body;
+                mybody.classList.toggle('mydark')
+            }
+        </script>
+        
+
+    </head>
+    <body>
+        <header>
+            <div id="pout"> <p id="out"></p> </div>
+            <div class="social">
+                <div id="btnloc">
+                    <button onclick="geolocation()">Geolocation</button>
+                </div>
+                <div id="ploc"> <p id="location"></p> </div>
+                <div id="pwea"> <p id="weather"></p></div>   
+                <button type="button" class="btn btn-link">HELP</button>
+                <span class="glyphicon glyphicon-certificate" onClick="changeMode()"></span>
+            </div>
+            <div class="brand"> 
+                <img class="brandimage" src="N.jpg" alt="N">
+                NIKHIL's Payments Bank
+                
+            </div>
+
+        </header>
+        
+        <div class="box">
+            <div id="coupon">
+                <button onClick="closeCoupon()">&times;</button>
+            </div>
+            <div class="container">
+                <hr/>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        DIGITAL BANKING LOGIN
+                    </div>
+                    <div class="panel-body">
+                        <form action="" method="GET">
+                            <div class="form-group has-success">
+                                <label class="control-label">USER NAME</label>
+                                <input class="form-control" name="fname" 
+                                placeholder="firstname" />
+                            </div>
+                            <div class="form-group has-success">
+                                <label class="control-label">PASSWORD</label>
+                                <input class="form-control" name="fname" 
+                                placeholder="firstname" />
+                            </div>
+                            <div class="form-group has-success">
+                                <label class="control-label">CAPTCHA</label>
+                                <input class="form-control" name="fname" 
+                                placeholder="firstname" />
+                            </div>
+    
+                            <button class="btn btn-success">Submit</button>
+                            <button class="btn btn-success">Reset</button>
+                        </form>
+                        
+                     </div>
+                </div>
+            </div>
+            <div class="imagediv">
+                <img class="img-responsive" src="logo.png" alt="logo">
+                <!--
+                <img src="logo.png" class="img-rounded" alt="logo">-->
+            </div>
+            
+        </div>
+        <footer>
+            
+            <h4> &copy NIKHIL's Payments BANK, All rights reserved</h4>
+            <div class="fotDiv">
+                <div id="geolocation">
+                    
+                    
+                <script>
+                    let x = document.getElementById('out');
+                    let y = document.getElementById('weather');
+                    let z = document.getElementById('location');
+                    function geolocation(){
+                        if(navigator.geolocation){
+                            navigator.geolocation.getCurrentPosition(showPosition)
+                        }else{
+                            x.innerText= "Geo Not Supported"
+                        }
+                    }
+        
+                    function showPosition(data){
+                        console.log(data)
+                        let lat = data.coords.latitude;
+                        let long = data.coords.longitude;
+                        x.innerText = `Lat : ${lat} 
+                         long : ${long}`;
+                        const url = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${long}&mode=json&units=metric&cnt=5&appid=fbf712a5a83d7305c3cda4ca8fe7ef29`;
+                        //api calling
+                        fetch(url,{method:'GET'})
+                        //return promise
+                        .then((res) => res.json())
+                        // resolve the promise
+                        .then((data) => {
+                            y.innerText = ` ${data.city.name}`
+                            z.innerText = ` ${data.list[0].temp.day} °C`
+                        })
+        
+                    }
+                </script>
+                </div>
+                <!--
+                <ul>
+                    <li>About NPB</li>
+                </ul> -->
+            </div>
+            <div class="fotDiv">
+                <ul>
+                    <li>Contact Us</li>
+                </ul>
+            </div>
+            <div class="fotDiv ">
+                <ul>
+                    <li>LEARN MORE</li>
+                </ul>
+            </div>
+        </footer>
+        <script>
+            window.onload=loadCoupon()
+        </script>    
+        
+    </body>
+    
+</html>
